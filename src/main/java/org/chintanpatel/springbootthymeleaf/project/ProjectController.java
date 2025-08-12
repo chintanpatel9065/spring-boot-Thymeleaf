@@ -67,7 +67,7 @@ public class ProjectController {
         return "redirect:/projects";
     }
 
-    @GetMapping("/projects/searchProject")
+    @GetMapping("/projects/search/projectName")
     public String searchByProjectName(@RequestParam("projectName") String projectName, Model model) {
         List<Project> projectList = projectService.searchByProjectName(projectName);
         model.addAttribute("projectList", projectList);
@@ -76,7 +76,7 @@ public class ProjectController {
         return "project/project-list";
     }
 
-    @GetMapping("/projects/searchPriority")
+    @GetMapping("/projects/search/priorityType")
     public String searchByPriorityType(@RequestParam("priorityType") String priorityType, Model model) {
         List<Project> projectList = projectService.searchByPriorityType(priorityType);
         model.addAttribute("projectList", projectList);

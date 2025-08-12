@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Projects</title>
+    <link rel="stylesheet" th:href="@{/webjars/bootstrap/css/bootstrap.min.css}" type="text/css">
+    <script th:src="@{/webjars/bootstrap/js/bootstrap.min.js}" type="text/javascript"></script>
+</head>
+<body class="p-3 m-3 border-0">
+<div class="container mt-3">
+    <div class="row">
+        <div class="col-sm-12 mb-3 mb-sm-0">
+            <div class="card">
+                <div class="card-header">
+                    <h3 class="fw-bolder">Projects</h3>
+                </div>
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col-md-5">
+                            <form th:action="@{/projects/search/projectName}" method="get" class="row g-3">
+                                <div class="col-md-8">
+                                    <input type="text" class="form-control" name="projectName" placeholder="Search by project name">
+                                </div>
+                                <div class="col-md-4">
+                                    <button type="submit" class="btn btn-success">Search By Project</button>
+                                </div>
+                            </form>
+                        </div>
+                        <div class="col-md-5">
+                            <form th:action="@{/projects/search/priorityType}" method="get" class="row g-3">
+                                <div class="col-md-8">
+                                    <input type="text" class="form-control" name="priorityType" placeholder="Search by priority type">
+                                </div>
+                                <div class="col-md-4">
+                                    <button type="submit" class="btn btn-success">Search By Priority</button>
+                                </div>
+                            </form>
+                        </div>
+                        <div class="col-md-2">
+                            <a th:href="@{/projects/showProject}" class="btn btn-success">Add New Project</a>
+                        </div>
+                    </div>
+                    <table class="table table-bordered table-striped mt-5">
+                        <thead>
+                        <tr>
+                            <th>ProjectName</th>
+                            <th>Description</th>
+                            <th>StartDate</th>
+                            <th>EndDate</th>
+                            <th>Priority</th>
+                            <th>Task</th>
+                            <th>Action</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr th:each="project : ${projectList}">
+                            <td th:text="${project.projectName}"></td>
+                            <td th:text="${project.description}"></td>
+                            <td th:text="${project.startDate}"></td>
+                            <td th:text="${project.endDate}"></td>
+                            <td th:text="${project.priority.priorityType}"></td>
+                            <td th:text="${project.tasks.size()}"></td>
+                            <td>
+                                <a th:href="@{/projects/manageProject/{projectId}(projectId=${project.projectId})}" class="link-success">Edit</a>
+                                &nbsp;|&nbsp;
+                                <a th:href="@{/projects/deleteProject/{projectId}(projectId=${project.projectId})}" class="link-danger">Delete</a>
+                            </td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+</html>
