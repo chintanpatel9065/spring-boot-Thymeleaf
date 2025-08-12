@@ -17,7 +17,7 @@ public class StatusController {
         this.statusService = statusService;
     }
 
-    @GetMapping("/statuses/listStatus")
+    @GetMapping("/statuses")
     public String listStatus(Model model) {
         List<Status> statusList = statusService.getAllStatusList();
         model.addAttribute("statusList", statusList);
