@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Priorities</title>
+    <link rel="stylesheet" th:href="@{/webjars/bootstrap/css/bootstrap.min.css}" type="text/css">
+    <script th:src="@{/webjars/bootstrap/js/bootstrap.min.js}" type="text/javascript"></script>
+</head>
+<body class="p-3 m-3 border-0">
+<div class="container mt-3">
+    <div class="row">
+        <div class="col-sm-12 mb-3 mb-sm-0">
+            <div class="card">
+                <div class="card-header">
+                    <h3 class="fw-bolder">Priorities</h3>
+                </div>
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col-md-10">
+                            <form th:action="@{/priorities/searchPriority}" method="get" class="row g-3">
+                                <div class="col-md-8">
+                                    <input type="text" class="form-control" name="priorityType" placeholder="Search by priority type">
+                                </div>
+                                <div class="col-md-4">
+                                    <button type="submit" class="btn btn-success">Search By Priority</button>
+                                </div>
+                            </form>
+                        </div>
+                        <div class="col-md-2">
+                            <a th:href="@{/priorities/showPriority}" class="btn btn-success">Add New Priority</a>
+                        </div>
+                    </div>
+                    <table class="table table-bordered table-striped mt-5">
+                        <thead>
+                        <tr>
+                            <th class="col-4">Priority</th>
+                            <th class="col-4">Projects</th>
+                            <th class="col-4">Action</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr th:each="priority : ${priorityList}">
+                            <td th:text="${priority.priorityType}"></td>
+                            <td th:text="${priority.projects.size()}"></td>
+                            <td>
+                                <a th:href="@{/priorities/managePriority/{priorityId}(priorityId=${priority.priorityId})}" class="link-success">Edit</a>
+                                &nbsp;|&nbsp;
+                                <a th:href="@{/priorities/deletePriority/{priorityId}(priorityId=${priority.priorityId})}" class="link-danger">Delete</a>
+                            </td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+</html>
