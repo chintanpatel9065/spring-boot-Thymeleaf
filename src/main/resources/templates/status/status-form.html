@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title th:text="${status.statusId != null ? 'Edit Status' : 'Add Status'}">Status Form</title>
+    <link rel="stylesheet" th:href="@{/webjars/bootstrap/css/bootstrap.min.css}" type="text/css">
+    <script th:src="@{/webjars/bootstrap/js/bootstrap.min.js}" type="text/javascript"></script>
+</head>
+<body class="p-3 m-3 border-0">
+<div class="container mt-3">
+    <div class="row">
+        <div class="col-sm-12 mb-3 mb-sm-0">
+            <div class="card">
+                <div class="card-header">
+                    <h3 class="fw-bolder" th:text="${status.statusId != null ? 'Edit Status' : 'Add Status'}"></h3>
+                </div>
+                <div class="card-body">
+                    <form th:action="@{/statuses/insertOrUpdateStatus}" method="post" class="row g-3" th:object="${status}">
+                        <input type="hidden" th:field="*{statusId}">
+                        <div class="col-12 mt-3">
+                            <label class="form-label fw-bold">Status</label>
+                            <input type="text" class="form-control" th:field="*{statusType}">
+                            <div class="text-danger" th:if="${#fields.hasErrors('statusType')}" th:errors="*{statusType}"></div>
+                        </div>
+                        <div class="col-12 d-grid gap-2">
+                            <button type="submit" class="btn btn-success">Submit</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+</html>
