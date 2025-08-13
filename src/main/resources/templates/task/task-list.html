@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Tasks</title>
+    <link rel="stylesheet" th:href="@{/webjars/bootstrap/css/bootstrap.min.css}" type="text/css">
+    <script th:src="@{/webjars/bootstrap/js/bootstrap.min.js}" type="text/javascript"></script>
+</head>
+<body class="p-3 m-3 border-0">
+<div class="container mt-5">
+    <div class="row">
+        <div class="col-sm-12 mb-3 mb-sm-0">
+            <div class="card">
+                <div class="card-header">
+                    <h3 class="fw-bolder">Tasks</h3>
+                </div>
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col-md-3">
+                            <form th:action="@{/tasks/search/taskName}" method="get" class="row g-3">
+                                <div class="col-md-8">
+                                    <input type="text" class="form-control" name="taskName" placeholder="Search by task name">
+                                </div>
+                                <div class="col-md-4">
+                                    <button type="submit" class="btn btn-success">Search</button>
+                                </div>
+                            </form>
+                        </div>
+                        <div class="col-md-3">
+                            <form th:action="@{/tasks/search/statusType}" method="get" class="row g-3">
+                                <div class="col-md-8">
+                                    <input type="text" class="form-control" name="statusType" placeholder="Search by status type">
+                                </div>
+                                <div class="col-md-4">
+                                    <button type="submit" class="btn btn-success">Search</button>
+                                </div>
+                            </form>
+                        </div>
+                        <div class="col-md-4">
+                            <form th:action="@{/tasks/search/projectName}" method="get" class="row g-3">
+                                <div class="col-md-8">
+                                    <input type="text" class="form-control" name="projectName" placeholder="Search by project name">
+                                </div>
+                                <div class="col-md-4">
+                                    <button type="submit" class="btn btn-success">Search</button>
+                                </div>
+                            </form>
+                        </div>
+                        <div class="col-md-2">
+                            <a th:href="@{/tasks/showTask}" class="btn btn-success">Add New Task</a>
+                        </div>
+                    </div>
+                    <table class="table table-bordered table-striped mt-5">
+                        <thead>
+                        <tr>
+                            <th>TaskName</th>
+                            <th>Description</th>
+                            <th>StartDate</th>
+                            <th>EndDate</th>
+                            <th>Status</th>
+                            <th>Project</th>
+                            <th>Action</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr th:each="task : ${taskList}">
+                            <td th:text="${task.taskName}"></td>
+                            <td th:text="${task.description}"></td>
+                            <td th:text="${task.startDate}"></td>
+                            <td th:text="${task.endDate}"></td>
+                            <td th:text="${task.status.statusType}"></td>
+                            <td th:text="${task.project.projectName}"></td>
+                            <td>
+                                <a th:href="@{/tasks/manageTask/{taskId}(taskId=${task.taskId})}" class="link-success">Edit</a>
+                                &nbsp;|&nbsp;
+                                <a th:href="@{/tasks/deleteTask/{taskId}(taskId=${task.taskId})}" class="link-danger">Delete</a>
+                            </td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+</html>
