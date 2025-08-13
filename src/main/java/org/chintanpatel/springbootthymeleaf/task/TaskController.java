@@ -50,6 +50,7 @@ public class TaskController {
             List<Project> projectList = projectService.getAllProjectList();
             model.addAttribute("statusList", statusList);
             model.addAttribute("projectList", projectList);
+            return "task/task-form";
         }
         taskService.addTask(task);
         return "redirect:/tasks";
